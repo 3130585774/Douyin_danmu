@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Button x:Name="get_id" Content="连接" HorizontalAlignment="Left" Height="26" Margin="585,38,0,0" VerticalAlignment="Top" Width="103" Click="Button_Click"/>
+        <TextBox x:Name="live_url" HorizontalAlignment="Left" Height="26" Margin="10,38,0,0" TextWrapping="Wrap" Text="https://live.douyin.com/xxxxx" VerticalAlignment="Top" Width="570" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="10,7,0,0" TextWrapping="Wrap" Text="抖音直播间ID或抖音直播间链接：" VerticalAlignment="Top" Width="307" FontFamily="JetBrains Mono" FontSize="20"/>
+        <TextBox x:Name="danmu" HorizontalAlignment="Center" Height="347" Margin="0,78,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="780" TextChanged="Danmu_TextChanged" VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Top" IsReadOnly="True" FontSize="16"/>
+        <CheckBox x:Name="showbrowser" Content="显示浏览器" HorizontalAlignment="Left" Margin="499,15,0,0" VerticalAlignment="Top"  IsChecked="False" />
+        <Button x:Name="disconnect" Content="断开" HorizontalAlignment="Left" Height="26" Margin="693,38,0,0" VerticalAlignment="Top" Width="97" Click="Disconnect_Click"/>
+
     </Grid>
 </Window>

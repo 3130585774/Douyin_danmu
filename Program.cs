@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using RestSharp;
-
+using System.Diagnostics;
 namespace Douyin_danmu
 {
     class Program
@@ -35,10 +35,10 @@ namespace Douyin_danmu
                 {
                     fetcher.DownloadProgressChanged += Fetcher_DownloadProgressChanged;
                     await fetcher.DownloadAsync(BrowserFetcher.DefaultChromiumRevision);
-                    Console.WriteLine();   // add a new line
+                    //Debug.WriteLine();   // add a new line
                 }
 
-                Console.WriteLine($"Starting browser...");
+                Debug.WriteLine($"Starting browser...");
                 using Browser browser = (Browser)await Puppeteer.LaunchAsync(new LaunchOptions()
                 {
                     Headless = !options.ShowBrowser,
@@ -57,7 +57,7 @@ namespace Douyin_danmu
                 if (options.PostAddress != null)
                     client = new RestClient(options.PostAddress);
 
-                Console.WriteLine($"Loading page...");
+                Debug.WriteLine($"Loading page...");
                 using Page page = (Page)(await browser.PagesAsync())[0];
 
                 await page.GoToAsync(liveHomeAddr);
@@ -96,7 +96,8 @@ namespace Douyin_danmu
 
                             name = name.TrimEnd(':', '：');
 
-                            Console.WriteLine($"{name}: {value}");
+
+                            Debug.WriteLine($"{name}: {value}");
 
                             if (client != null)
                             {
@@ -110,7 +111,7 @@ namespace Douyin_danmu
                                 {
                                     _ = await client.PostAsync(request);
                                 }
-                                catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                                catch (Exception ex) { Debug.WriteLine(ex.ToString()); }
                             }
                         }
                     }
