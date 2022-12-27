@@ -33,6 +33,7 @@ namespace Douyin_danmu
             showb = false;
             discon = false;
             string roomid = Get_Roomid(url);
+            //string roomid = "859943315379";
             Debug.WriteLine(roomid);
             _ = StartAsync(showb, roomid);
         }
@@ -59,7 +60,7 @@ namespace Douyin_danmu
 
             if (!fetcher.LocalRevisions().Contains(BrowserFetcher.DefaultChromiumRevision))
             {
-                danmu.AppendText("Downling...");
+                danmu.AppendText("Downling...\n");
                 await fetcher.DownloadAsync(BrowserFetcher.DefaultChromiumRevision);
                 //Debug.WriteLine();   // add a new line
             }
@@ -69,6 +70,7 @@ namespace Douyin_danmu
             {
                 Headless = !show,
             });
+            MainWindow.browser = browser;
             string liveHomeAddr = $"https://live.douyin.com/";
             string liveRoomAddr = $"https://live.douyin.com/{roomId}";
             danmu.AppendText("Loading page...\n");
@@ -76,16 +78,17 @@ namespace Douyin_danmu
             using PuppeteerSharp.Page page = (PuppeteerSharp.Page)(await browser.PagesAsync())[0];
             await page.GoToAsync(liveHomeAddr);
             await page.GoToAsync(liveRoomAddr);
+            string lastDataId = null;
             while (!discon)
             {
-                string query = QueryHelper.AllChatMessagesAfter(null);
-                var items = (ElementHandle[])await page.QuerySelectorAllAsync(query);
+                string query = QueryHelper.AllChatMessagesAfter(lastDataId);
+                ElementHandle[] items = await page.QuerySelectorAllAsync(query);
 
-                string lastDataId;
+                
                 if (items.Length == 0)
                 {
                     string msgQuery = QueryHelper.AllChatMessages();
-                    var msgs = (ElementHandle[])await page.QuerySelectorAllAsync(msgQuery);
+                    ElementHandle[] msgs = await page.QuerySelectorAllAsync(msgQuery);
 
                     if (msgs.Length == 0)
                         lastDataId = null;
@@ -108,8 +111,6 @@ namespace Douyin_danmu
                         string value = await valueNode.GetInnerTextAsync();
 
                         name = name.TrimEnd(':', '：');
-                        Debug.WriteLine(name);
-                        Debug.WriteLine(value);
                         Debug.WriteLine($"{name}: {value}");
                         danmu.AppendText($"{name}: {value}\n");
 
