@@ -12,8 +12,10 @@ Contributions, issues and feature requests are welcome!<br />Feel free to check 
 
 👤 **Rustry**
 
-* Github: [@3130585774](https://github.com/3130585774)  
-参考
+* Github: [@3130585774](https://github.com/3130585774)
+* 🐧:3416282798  
+
+参考[SlimeNull的DouyinCap项目](https://github.com/SlimeNull/DouyinCap)
 
 
 ## Show your support
