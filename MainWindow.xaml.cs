@@ -105,8 +105,6 @@ namespace Douyin_danmu
 
                     if (nameNode != null && valueNode != null)
                     {
-                        //string name = await item.EvaluateFunctionAsync<string>("e => e.textContent", nameNode);
-                        //string value = await item.EvaluateFunctionAsync<string>("e => e.textContent", valueNode);
                         string name = await nameNode.GetInnerTextAsync();
                         string value = await valueNode.GetInnerTextAsync();
 
